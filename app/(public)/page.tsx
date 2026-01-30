@@ -3,8 +3,12 @@ import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/Card";
 import { categories, testimonials, tutors } from "@/lib/mockData";
+import {authClient} from "@/lib/auth-client"
+export default async function HomePage() {
+const session = await authClient.getSession();
+console.log(session)
 
-export default function HomePage() {
+
   return (
     <div className="sb-grid-bg">
       <div className="sb-container py-12">
