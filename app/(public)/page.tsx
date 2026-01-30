@@ -3,10 +3,14 @@ import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/Card";
 import { categories, testimonials, tutors } from "@/lib/mockData";
-import {authClient} from "@/lib/auth-client"
+import { userService } from "@/service/userService";
+
+
 export default async function HomePage() {
-const session = await authClient.getSession();
-console.log(session)
+
+const sesion = await userService.getSession();
+console.log("session", sesion);
+
 
 
   return (

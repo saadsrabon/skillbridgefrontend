@@ -7,6 +7,7 @@ import { useAuth } from "@/components/auth/AuthProvider";
 import type { AuthUser, UserRole } from "@/components/auth/authTypes";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { authClient } from "@/lib/auth-client";
 
 const demoUsers: AuthUser[] = [
   { id: "demo-student", name: "Demo Student", email: "student@demo.com", role: "student" },
@@ -46,6 +47,12 @@ export default function LoginPage() {
     router.replace(nextPath ?? roleHome(user.role));
   };
 
+const signIn = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+    callbackURL: "http://localhost:3000",
+  });
+};
   return (
     <div className="sb-container py-10">
       <div className="mx-auto max-w-md sb-card p-6">
@@ -85,7 +92,7 @@ export default function LoginPage() {
 
         <div className="mt-6 border-t border-border pt-4">
           <div className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Quick login</div>
-          <div className="mt-3 grid gap-2 sm:grid-cols-3">
+          {/* <div className="mt-3 grid gap-2 sm:grid-cols-3">
             {demoUsers.map((u) => (
               <button
                 key={u.id}
@@ -99,7 +106,10 @@ export default function LoginPage() {
                 <div className="text-muted-foreground">{u.email}</div>
               </button>
             ))}
-          </div>
+          </div> */}
+          <Button variant="secondary" onClick={signIn} className="mt-3 w-full ">
+            Sign in with Google
+          </Button>
         </div>
       </div>
     </div>
